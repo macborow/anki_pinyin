@@ -1,13 +1,29 @@
 # -*- coding: utf-8 -*-
 import re
 
-def replace_numbers_with_tones(text):
+
+def get_index_of_tone_vowel(syllable):
     """
-    Replace syllables ending with numbers (e.g. shu1) with pinyin tone marks.
+    Returns the index of the vowel that should be marked with a tone accent in a given syllable.
     The tone marks are assigned with the following priority:
      - A and E first
      - O is accented in OU
      - otherwise, the *final* vowel
+    ARGS:
+        syllable (str)
+    """
+    index = len(syllable) - 1
+    if 'a' in syllable:
+        index = syllable.index('a')
+    elif 'e' in syllable:
+        index = syllable.index('e')
+    elif 'ou' in syllable:
+        index = syllable.index('ou')
+    return index
+
+def replace_numbers_with_tones(text):
+    """
+    Replace syllables ending with numbers (e.g. shu1) with pinyin tone marks.
     ARGS:
         text (str) - input string
     RETURNS:
@@ -27,15 +43,8 @@ def replace_numbers_with_tones(text):
         next_pos = match.end()
 
         vowel_group_text = match.groupdict().get("vowels")
-        replace_index = match.end(vowel_group_index) - 1
-        if 'a' in vowel_group_text:
-            replace_index = match.start(vowel_group_index) + vowel_group_text.index('a')
-        elif 'e' in vowel_group_text:
-            replace_index = match.start(vowel_group_index) + vowel_group_text.index('e')
-        elif 'ou' in vowel_group_text:
-            replace_index = match.start(vowel_group_index) + vowel_group_text.index('ou')
+        replace_index = match.start(vowel_group_index) + get_index_of_tone_vowel(vowel_group_text)
 
-        print(replace_index, text[replace_index])
         vowel_index = vowels.index(text[replace_index])
         vowel_with_tone_index = vowel_index * 4 + int(match.groupdict().get("tonenumber")) - 1
         vowel_with_tone = tones[vowel_with_tone_index]
