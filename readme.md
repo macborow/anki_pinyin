@@ -12,5 +12,5 @@ Wo3 zai4 xue2 zhong1wen2.
 after pressing the "tones" button will be replaced with:
 
 ```
-Wǒ zài xúe zhōngwén.
+wǒ zài xué zhōngwén.
 ```
