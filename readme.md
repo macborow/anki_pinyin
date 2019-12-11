@@ -1,7 +1,11 @@
 # Anki Pinyin Add-On
 
 This is an add-on for Anki 2.1 that simplifies Chinese pinyin input. It converts
-numbers 1-4 denoting the tone of each syllable to pinyin tone marks. Use at your own risk.
+numbers 1-4 placed after each syllable to pinyin tone marks and then colourizes
+each syllable according to its tone. Note that the colours corresponding to each tone
+are currently hard coded (1 - blue, 2 - red, 3 - green, 4 and neutral - no colour/black).
+
+Use at your own risk.
 
 Example:
 
