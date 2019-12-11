@@ -65,6 +65,8 @@ def tokenize(text):
                 yield Token(syllable, get_tone_number(syllable))
                 text = text[len(syllable):]
                 continue
+        if not text:
+            break
         unmatched.append(text[0])
         text = text[1:]
     if unmatched:

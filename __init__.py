@@ -31,6 +31,7 @@ def colour_tones(text):
             else:
                 result.append('</font>')
         result.append(token.text)
+        current_tone = token.tone
     result.append('</font>')
     return ''.join(result)
 
