@@ -1,6 +1,6 @@
 import re
 
-import tones
+from . import tones
 
 class Token:
     __slots__ = ['text', 'tone']
