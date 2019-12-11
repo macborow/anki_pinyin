@@ -12,6 +12,7 @@ def get_index_of_tone_vowel(syllable):
     ARGS:
         syllable (str)
     """
+    vowels = "AaEeIiOoUuÜü"
     index = len(syllable) - 1
     if 'a' in syllable:
         index = syllable.index('a')
@@ -19,7 +20,12 @@ def get_index_of_tone_vowel(syllable):
         index = syllable.index('e')
     elif 'ou' in syllable:
         index = syllable.index('ou')
+    else:
+        match = re.search('{vowels}+'.format(vowels=vowels), syllable)
+        if match:
+            return match.end() - 1
     return index
+
 
 def replace_numbers_with_tones(text):
     """
@@ -29,8 +35,8 @@ def replace_numbers_with_tones(text):
     RETURNS:
         str
     """
-    vowels = "AaEeIiOoUuVv"
-    tones = "ĀÁǍÀāáǎàĒÉĚÈēéěèĪÍǏÌīíǐìŌÓǑÒōóǒòŪÚǓÙūúǔùǕǗǙǛǖǘǚǜ"
+    vowels = "AaEeIiOoUuVvÜü"
+    tones = "ĀÁǍÀāáǎàĒÉĚÈēéěèĪÍǏÌīíǐìŌÓǑÒōóǒòŪÚǓÙūúǔùǕǗǙǛǖǘǚǜǕǗǙǛǖǘǚǜ"
     vowel_group_index = 1  # make sure the index is correct as group names cannot be used with span() method
     tone_char_regex = re.compile("[^{vowels}{tones}]*(?P<vowels>[{vowels}]+)[^{vowels}{tones}]*(?P<tonenumber>[1-4])".format(vowels=vowels, tones=tones))
     pos = 0
@@ -42,7 +48,7 @@ def replace_numbers_with_tones(text):
             break
         next_pos = match.end()
 
-        vowel_group_text = match.groupdict().get("vowels")
+        vowel_group_text = match.groupdict().get("vowels").replace('v', 'ü').replace('V', 'Ü')
         replace_index = match.start(vowel_group_index) + get_index_of_tone_vowel(vowel_group_text)
 
         vowel_index = vowels.index(text[replace_index])
