@@ -9,11 +9,12 @@ def get_index_of_tone_vowel(syllable):
      - A and E first
      - O is accented in OU
      - otherwise, the *final* vowel
+    Returns -1 if no vowels found.
     ARGS:
         syllable (str)
     """
     vowels = "AaEeIiOoUuÜü"
-    index = len(syllable) - 1
+    index = -1
     if 'a' in syllable:
         index = syllable.index('a')
     elif 'e' in syllable:
@@ -21,9 +22,9 @@ def get_index_of_tone_vowel(syllable):
     elif 'ou' in syllable:
         index = syllable.index('ou')
     else:
-        match = re.search('{vowels}+'.format(vowels=vowels), syllable)
+        match = re.search('[{vowels}]+'.format(vowels=vowels), syllable)
         if match:
-            return match.end() - 1
+            index = match.end() - 1
     return index
 
 
