@@ -24,7 +24,7 @@ def tokenize(text):
     """
     vowels = "aeiouü"
     tones_list = "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ"
-    initials = ['', 'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'w']
+    initials = ['', 'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'w', 'y']
     neutral_finals = ['a', 'o', 'e', 'ai', 'ei', 'ao', 'ou', 'an', 'en', 'ang', 'eng', 'er',
                       'i', 'ia', 'io', 'ie', 'iao', 'iu', 'ian', 'in', 'iang', 'ing',
                       'u', 'ua', 'ue', 'uo', 'uai', 'ui', 'uan', 'un', 'uang', 'ong',
