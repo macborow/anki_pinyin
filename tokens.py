@@ -57,6 +57,7 @@ def tokenize(text):
     permutations.sort(key=lambda x: -len(x))  # check for longest match first
     unmatched = []
     while text:
+        matched = False
         for syllable in permutations:
             if text.startswith(syllable):
                 if unmatched:
@@ -64,11 +65,12 @@ def tokenize(text):
                     unmatched = []
                 yield Token(syllable, get_tone_number(syllable))
                 text = text[len(syllable):]
-                continue
+                matched = True
+                break
         if not text:
             break
-        unmatched.append(text[0])
-        text = text[1:]
+        if not matched:
+            unmatched.append(text[0])
+            text = text[1:]
     if unmatched:
         yield Token(''.join(unmatched), 0)
-
