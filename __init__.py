@@ -18,18 +18,20 @@ def colour_tones(text):
         str
     """
     colour_codes = {
+        0: "#000000",
         1: "#0000ff",
         2: "#ff0000",
-        3: "#00aa00"
+        3: "#00aa00",
+        4: "#000000"
     }
     result = []
-    current_tone = 0
+    current_tone = -1
     for token in tokens.tokenize(text):
         if token.tone != current_tone:
+            if current_tone != -1:
+                result.append('</font>')
             if token.tone in colour_codes:
                 result.append('<font color="{}">'.format(colour_codes[token.tone]))
-            else:
-                result.append('</font>')
         result.append(token.text)
         current_tone = token.tone
     result.append('</font>')
