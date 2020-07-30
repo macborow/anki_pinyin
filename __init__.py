@@ -42,7 +42,6 @@ def addon_replace_tones(self):
     field = self.currentField
     text = self.note.fields[field]
     self.note.fields[field] = colour_tones(tones.replace_numbers_with_tones(text))
-    self.note.flush()
     self.loadNote(focusTo=field)
 
 Editor.addon_replace_tones = addon_replace_tones
